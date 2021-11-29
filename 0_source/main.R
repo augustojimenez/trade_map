@@ -20,14 +20,14 @@ j <- 9
 for (r in reporter) {
       for (p in partner) {
             for (cc in product) {
-                  for (year in 2012:2020){
-                        print(paste("Working on reporter ", r,
-                                    ", partner ", p,
-                                    ", product ", cc,
-                                    ", year ", year))
+                  for (year in 2012:2020) {
+                        print(paste0("Working on reporter ", r,
+                                     ", partner ", p,
+                                     ", product ", cc,
+                                     ", year ", year))
                         temp <- get.Comtrade(r = r, p = p,
                                              ps = year, cc = cc)$data
-                        if (!is.null(temp)){
+                        if (!is.null(temp)) {
                               data <- data %>%
                                     rbind(temp)
                         } else {
@@ -38,8 +38,10 @@ for (r in reporter) {
                         }
                         i <- i + 1
                         if (i == j) {
-                              Sys.sleep(30)
+                              print("Pausing download.")
+                              Sys.sleep(300)
                               i <- 0
+                              print("Resuming download.")
                         }
                   }
             }
